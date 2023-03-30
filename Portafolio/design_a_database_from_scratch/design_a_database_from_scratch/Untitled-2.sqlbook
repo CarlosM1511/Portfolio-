@@ -1,0 +1,38 @@
+-- SQLBook: Code
+-- Active: 1673463944071@@localhost@5432@project1
+CREATE TABLE players (
+    id int PRIMARY KEY,
+    name varchar(20),
+    age int,
+    country varchar(20)
+);
+
+CREATE TABLE matches (
+    id int PRIMARY KEY,
+    winner varchar(20),
+    tournament_id int REFERENCES tournament(id)
+);
+
+CREATE TABLE tournament (
+    id int PRIMARY KEY,
+    date date,
+    event_name varchar(20),
+    prize_pool money
+
+);
+
+CREATE TABLE player_match (
+    id int PRIMARY KEY,
+    player_id int REFERENCES players(id),
+    match_id int REFERENCES matches(id),
+    kills int,
+    placement int
+
+);
+
+CREATE TABLE tournament_match (
+    id int PRIMARY KEY,
+    tournament_id int REFERENCES tournament(id),
+    match_id int REFERENCES matches(id)
+
+);
